@@ -2,6 +2,7 @@
 
 void* database_function(void* ps)
 {
+    sem_t *s= ps;
     char username1="user@user1.com";
     char password1="123456789";
     int ret,msg_length;
@@ -15,7 +16,7 @@ void* database_function(void* ps)
         perror("mq_open");
         exit(1);
     }
-    sem_wait(&s1);
+    sem_wait(s);
     char user[8192],password[8192];
     int maxlen=1024,prio;
     msg_length=mq_receive(mqid,user,maxlen,&prio);
@@ -48,7 +49,7 @@ void* database_function(void* ps)
 		    exit(3);
 	    }
     }
-    sem_post(&s2);
+    sem_post(s+1);
     mq_close(mqid);
 
 
