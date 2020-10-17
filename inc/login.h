@@ -9,5 +9,5 @@
 #include<stdlib.h>
 #include<string.h>
 #include<pthread.h>
-int* login(void* pv);
+void* login(void* pv);
 #endif
