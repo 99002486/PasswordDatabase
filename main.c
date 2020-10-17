@@ -2,19 +2,19 @@
 #include"login.h"
 #include"database.h"
 
-sem_t s1,s2;
+sem_t s[2];
 
 int main()
 {
     pthread_t th1,th2;
-    sem_init(&s1,0,0);
-    sem_init(&s2,0,0);
-    pthread_create(&th1,NULL,database_function,NULL);
-    pthread_create(&th2,NULL,login),NULL);
+    sem_init(s,0,0);
+    sem_init(s+1,0,0);
+    pthread_create(&th1,NULL,database_function,(void *)s);
+    pthread_create(&th2,NULL,login,(void *)s);
     pthread_join(th1,NULL);
-    pthread_join(pt2,NULL);
-    sem_destroy(&s1);
-    sem_destroy(&s2);
+    pthread_join(th2,NULL);
+    sem_destroy(s);
+    sem_destroy(s+1);
     printf("Exiting program...");
     return 0;
 }
