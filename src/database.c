@@ -50,7 +50,6 @@ void* database_function(void* ps)
     }
     sem_post(&s2);
     mq_close(mqid);
-    return 0;
 
 
 }
