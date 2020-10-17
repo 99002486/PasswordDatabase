@@ -1,6 +1,6 @@
 #include "login.h"
 
-int* login(void* pv)
+void* login(void* pv)
 {
     printf("Entered the login function \n");
     int send,recv;
@@ -39,5 +39,4 @@ int* login(void* pv)
     buff[recv]='\0';
     printf("Available Login Credentials: %s",buff);
     mq_close(mqid);
-    return 0;
 }
